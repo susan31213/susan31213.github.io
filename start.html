@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -120,3 +121,126 @@
 </body>
 </html>
 
+=======
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>大樂透獎號分析小幫手</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+    <script src="js/main.js">
+    </script>
+    <script src="js/search.js">
+        var syear, smonth, fyear, fmonth, smode, len;
+        var ans = [];
+        for (var i = 0; i < 50; i++)
+            ans.push(0);
+    </script>
+    <script>
+        var times = 0;
+        function add_times() { times++; console.log(times); return times; }
+        function return_times() { return times; }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Microsoft JhengHei;
+        }
+        #logo
+        {
+	        position: absolute;
+	        top: 4.195em;
+	        width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-wrapper">
+        <div id="header" class="container">
+            <div id="logo">
+                <h1><a href="#">大樂透獎號分析小幫手</a></h1>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li><a href="index.html" accesskey="1" title="">Homepage</a></li>
+                    <li><a href="about.html" accesskey="2" title="">About</a></li>
+                    <li><a href="member.html" accesskey="3" title="">Member</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        var jsonData = [];
+        $.ajax({
+            url: 'output.json',
+            dataType: 'json',
+            type: 'get',
+            cache: false,
+            success: function (data) {
+                $(data).each(function (index, value) {
+                    jsonData.push(value);
+
+                    len = jsonData.length;
+                });
+            }
+        });
+    </script>
+    <div id="wrapper">
+        <div id="page" class="container">
+            <div id="content">
+                    <p>使用說明請參閱 <a href="about.html">About</a> 。</p>
+                    <p>日期輸入格式: YYYY / MM</p>
+
+                <form name="myform">
+                    <p>請輸入查詢年份與月份(2014/01~現在) :&nbsp;&nbsp;
+                        <input type="text" name="year1" size="5" />&nbsp;年
+                        <input type="text" name="month1" size="3" />&nbsp;月 ~
+                        <input type="text" name="year2" size="5" />&nbsp;年
+                        <input type="text" name="month2" size="3" />&nbsp;月
+                        &nbsp;&nbsp;模式:&nbsp;<input type="text" name="mode" size="2" />&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;<input type="button" style="padding-left:8px; padding-right:8px" value="查詢"
+                               onClick="syear = this.form.year1.value;
+                                    smonth = this.form.month1.value;
+                                    fyear = this.form.year2.value;
+                                    fmonth = this.form.month2.value;
+                                    smode = this.form.mode.value;
+                                    ans = rangeSearch(syear, smonth, fyear, fmonth, jsonData, smode, len);
+                                    update(ans);" />
+                        <input type="button" style="padding-left:8px; padding-right:8px" value="加入"
+                               onClick="syear = this.form.year1.value;
+                                    smonth = this.form.month1.value;
+                                    fyear = this.form.year2.value;
+                                    fmonth = this.form.month2.value;
+                                    smode = this.form.mode.value;
+                                    ans = rangeSearch(syear, smonth, fyear, fmonth, jsonData, smode, len);
+                                    addData(myChart, syear + '/' + smonth + '~' + fyear + '/' + fmonth + '(' + smode + ')', 'rgba(' + Math.round(255 * Math.random()) + ',' + Math.round(255 * Math.random()) + ',' + Math.round(255 * Math.random()) + ', 0.5' + ')', ans, add_times());" />
+                        <input type="button" style="padding-left:8px; padding-right:8px" value="重設"
+                               onClick="myChart.destroy(); start();" />
+                    </p>
+                </form>
+                <div style="width:170%;">
+                    <canvas id="myChart" width="1000" height="400"></canvas>
+                </div>
+                <script> start();</script>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="copyright" class="container">
+        <p>&copy; 蘇俐文、黃嫈家. All rights reserved. | Photos by <a href="https://www.flickr.com/photos/streetfly_jz/6835998578/">Jzee</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
+    </div>
+
+</body>
+</html>
+
+>>>>>>> origin/master
