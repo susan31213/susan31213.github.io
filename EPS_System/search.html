@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<!--
+	Transit by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Search - EPS System</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+        <script type="text/javascript">
+            var json_all;
+            var json_obj;
+        function Search(i){
+
+            $.get("https://script.google.com/macros/s/AKfycbxpeFGjIc2qttb9nmJyIX1wdW-CvshzThu3e6GVSwGwp4SUWPhs/exec", {
+                        "mode": "search",
+                        "symbol": json_all[i].symbol,
+                        "name": "",
+                        "shares": "",
+                        "ope": "",
+                        "gp": "",
+                        "tax": "",
+                        "o_gl": ""
+                    },
+                     function (data) {
+                         json_obj = JSON.parse(data)[0];
+                         var html = '<h2>' + json_obj.symbol + "&nbsp;&nbsp;&nbsp;" + json_obj.name + '</h2><section><table class="6u"><tbody><tr><td><b>Sales</b></td><td><input id="sales" type="text"/></td>' +
+                                    '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="button alt" onclick="calculate()">Calculate</a></td>' +
+                                    '</tr><tr><td><b>CGS</b></td><td><input id="cgs" type="text"/></td><td></td></tr>' +
+                                    '<tr><td><b>GP</b></td><td><input id="gp" type="text" /></td><td></td></tr>' +
+                                    '<tr><td><b>OPE</b></td><td><input id="ope" type="text" /></td><td></td></tr>'+
+                                    '<tr><td><b>OI</b></td><td><input id="oi" type="text" /></td><td></td></tr>'+
+                                    '<tr><td><b>O G/L</b></td><td>' + json_obj.ogl+ '</td><td></td></tr>'+
+                                    '<tr><td><b>PBT</b></td><td><input id="pbt" type="text" /></td><td></td></tr>'+
+                                    '<tr><td><b>Tax</b></td><td><input id="tax" type="text" /></td><td></td></tr>'+
+                                    '<tr><td><b>PAT</b></td><td><input id="pat" type="text" /></td><td></td></tr>'+
+                                    '<tr><td><b>Shares</b></td><td>' + json_obj.shares + '</td><td></td></tr>'+
+                                    '<tr><td><b>EPS</b></td><td><input id="eps" type="text" /></td><td></td></tr>'+
+                                    '<tr><td><b>GP%</b></td><td>' + json_obj.gp + '</td><td></td></tr>'+
+                                    '<tr><td><b>OPE / M</b></td><td>' + json_obj.ope + '</td><td></td></tr>'+
+                                    '<tr><td><b>Tax%</b></td><td>' + json_obj.tax+ '</td><td></td></tr></tbody></table></section>';
+
+                         document.getElementById("table_container").innerHTML = html;
+
+                    });
+        }
+
+        function Search_all() {
+            $.get("https://script.google.com/macros/s/AKfycbxpeFGjIc2qttb9nmJyIX1wdW-CvshzThu3e6GVSwGwp4SUWPhs/exec", {
+                "mode": "search_all",
+                "symbol": "",
+                "name": "",
+                "shares": "",
+                "ope": "",
+                "gp": "",
+                "tax": "",
+                "o_gl": ""
+            },
+                     function (data) {
+                         json_all = JSON.parse(data);
+
+                         var pre_html = '<h3>代號一覽</h3><section><table><thead><tr><th>代號</th><th>名稱</th></tr></thead><tbody>';
+                         var actual_html = '';
+                         var post_html = '</tbody></table></section>';
+
+                         for (var i = 0; i < json_all.length; i++)
+                         {
+                             actual_html += '<tr><td>' + json_all[i].symbol + '</td><td >' + json_all[i].name + '</td><td><a class="button small alt" id="search_sym" onclick="Search(' + i + ')">Calculate</a></td>';
+                         }
+
+                         document.getElementById("table_container").innerHTML = pre_html + actual_html + post_html;
+                     });
+        }
+
+        function Search_sym() {
+            var symbol = document.getElementById("search_symbol").value;
+            
+            for (var i = 0; i < json_all.length; i++)
+            {
+                if (parseInt(json_all[i].symbol) === parseInt(symbol)) {
+                    Search(i);
+                    return;
+                }  
+            }
+            document.getElementById("state").innerHTML = '查無此代碼!';
+            
+        }
+
+        function calculate() {
+            var sales = document.getElementById("sales").value;
+            var ogl = parseInt(json_obj.ogl);
+            var shares = parseInt(json_obj.shares);
+            var gp_percentage =  parseFloat(json_obj.gp) * 0.01;
+            var ope_m = parseInt(json_obj.ope);
+            var tax_percentage = parseFloat(json_obj.tax) * 0.01;
+
+            var gp = sales * gp_percentage;
+            var cgs = sales - gp;
+            var ope = ope_m * 3;
+            var oi = gp - ope;
+            var pbt = ope + ogl;
+            var tax = pbt * tax_percentage;
+            var pat = pbt - tax;
+            var eps = pat.toFixed(3) / shares.toFixed(3);
+
+            document.getElementById("gp").value = Math.round(gp);
+            document.getElementById("cgs").value = Math.round(cgs);
+            document.getElementById("ope").value = ope;
+            document.getElementById("oi").value = Math.round(oi);
+            document.getElementById("pbt").value = pbt;
+            document.getElementById("tax").value = Math.round(tax);
+            document.getElementById("pat").value = Math.round(pat);
+            document.getElementById("eps").value = Math.round(eps * 100) / 100;
+        }
+        </script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
+	</head>
+	<body>
+        <script>Search_all()</script>
+		<!-- Header -->
+			<header id="header">
+				<h1><a href="index.html">EPS System</a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="generic.html">Search</a></li>
+						<li><a href="elements.html">Edit</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Main -->
+			<section id="main" class="wrapper">
+				<div class="container">
+
+					<!--<header class="major">
+						<h2>Search</h2>
+
+						<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
+					</header>-->
+
+                    <section class="12u">
+                        <h3>搜尋代號</h3>
+                        <ul class="actions">
+                            <li><input type="text" size="50" placeholder="請輸入查詢代號..." id="search_symbol" /> </li>
+                            <li><a href="#" class="button" onclick="Search_sym()">Search</a></li>
+                            <li>&nbsp;&nbsp;<p style="color:red;" id="state"></p></li>
+                        </ul>
+                    </section>
+
+                    <section class="12u">
+                        <h3>新建代號</h3>
+                        <ul class="actions">
+                            <li><input type="text" size="50" placeholder="請輸入新建代號..." id="search_symbol" /> </li>
+                            <li><a href="#" class="button">Add</a></li>
+                        </ul>
+                    </section>
+                    <div id="table_container">
+                        <h3>代號一覽</h3>
+                        <section class="6u">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>代號</th>
+                                        <th>名稱</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </section>
+
+                    </div>
+				</div>
+                
+			</section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="8u 12u$(medium)">
+                        <ul class="copyright">
+                            <li>&copy; 永安投資公司. All rights reserved.</li>
+                            <li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+                            <li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+                        </ul>
+                    </div>
+                    <div class="4u$ 12u$(medium)">
+                        <ul class="icons">
+                            <li>
+                                <a class="icon rounded fa-facebook"><span class="label">Facebook</span></a>
+                            </li>
+                            <li>
+                                <a class="icon rounded fa-twitter"><span class="label">Twitter</span></a>
+                            </li>
+                            <li>
+                                <a class="icon rounded fa-google-plus"><span class="label">Google+</span></a>
+                            </li>
+                            <li>
+                                <a class="icon rounded fa-linkedin"><span class="label">LinkedIn</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+	</body>
+</html>
