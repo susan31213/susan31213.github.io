@@ -750,12 +750,6 @@
 			border-top: solid 2px rgba(144, 144, 144, 0.25);
 		}
 
-        table reverse {
-            
-        }
-            tr { display: block; float: left; }
-            th, td { display: block; }
-
 		table.alt {
 			border-collapse: separate;
 		}
@@ -781,16 +775,6 @@
 			table.alt tfoot {
 				border-top: 0;
 			}
-
-           
-
-    .table-transposed tr {
-        display: block;
-        float: left;
-    }
-    .table-transposed th, .table-transposed td {
-        display: block;
-    }
 
 /* Button */
 
