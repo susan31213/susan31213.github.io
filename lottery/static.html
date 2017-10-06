@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>大樂透獎號分析小幫手</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+    <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+    <style>
+        body {
+            font-family: Microsoft JhengHei;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-wrapper">
+        <div id="header" class="container">
+            <div id="logo">
+                <h1><a href="#">大樂透獎號分析小幫手</a></h1>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li><a href="index.html" accesskey="1" title="">Homepage</a></li>
+                    <li><a href="about.html" accesskey="2" title="">About</a></li>
+                    <li class="current_page_item"><a href="#" accesskey="3" title="">Static</a></li>
+                    <li><a href="member.html" accesskey="4" title="">Member</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div id="page" class="container">
+            <div id="content">
+                <div class="title">
+                    <h2>分析目標</h2>
+                    <div style="padding-left:40px; padding-bottom:20px">
+                        <p style="padding-top:20px; padding-left:20px">
+                            樂透可以讓人一夜致富，也能傾家蕩產，很多人都深信「名牌」這種說法。但真的是這樣嗎？<br />
+                            我們將使用樂透分析小幫手，讓資料說話，帶大家看看到底「名牌」存不存在。
+                        </p>
+                    </div>
+                    <div class="title">
+                        <h2>關聯性 / 獨立性 ?</h2>
+                        <div style="padding-left:40px; padding-bottom:20px">
+                            <p style="padding-top:20px; padding-left:20px">一個公平的彩券遊戲，獎號出現的機率應該是Uniform分布，也就是<strong>每個獎號出現機率應相同</strong>。<br />
+                            下面我們依序分析普通獎號、特別號、同時出現號碼的機率分布。
+                            </p>
+                            <h3 style="font-size:20px; padding-top:40px;">例子驗證：普通獎號</h3>
+                            <p style="padding-top:20px; padding-left:20px">
+                                1. 我們先看到<strong> 2016/01 ~ 2017/01 近一年內所有獎號的出現次數</strong>：<br />
+                                &nbsp;&nbsp;&nbsp;可以發現，在<strong> 17、33、35 </strong>出現了高峰，機率分布並沒有很平均。<br />
+                                &nbsp;&nbsp;&nbsp;出現次數的標準差較大。<br />
+                               <img src="http://i.imgur.com/UAbYyC5.jpg" height="400" style="padding-top:20px;" /> <br />
+                                2. 看到<strong> 2012/01 ~ 2017/01 近五年內所有獎號的出現次數</strong>：<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;發現出現次數的標準差漸小。<br />
+                                <img src="http://i.imgur.com/CDHWWTd.jpg" height="400" style="padding-top:20px;" /> <br />
+                                3. 最後看到<strong> 2004/01 ~ 2017/01 第一期至今所有獎號的出現次數</strong>：<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;發現出現次數的標準差更小了。<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;由以上3個分析結果可知，機率分布也漸趨於<strong>Uniform分布</strong>。<br />
+                                <img src="http://i.imgur.com/7oAassw.jpg" height="400" style="padding-top:20px;" /> <br />
+                                
+                            </p>
+                            <h3 style="font-size:20px; padding-top:40px;">例子驗證：特別獎號</h3>
+                            <p style="padding-top:20px; padding-left:20px">
+                                1. 我們先看到<strong> 2016/01 ~ 2017/01 近一年內特別獎號的出現次數</strong>：<br />
+                                &nbsp;&nbsp;&nbsp;樣本數少，出現了多個高峰，機率分布非常不平均。<br />
+                                &nbsp;&nbsp;&nbsp;出現次數的標準差極大。<br />
+                                <img src="http://i.imgur.com/U2HvCSg.jpg" height="400" style="padding-top:20px;" /> <br />
+                                2. 看到<strong> 2012/01 ~ 2017/01 近五年內特別獎號的出現次數</strong>：<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;發現標準差變小。<br />
+                                <img src="http://i.imgur.com/AriP4Iu.jpg" height="400" style="padding-top:20px;" /> <br />
+                                3. 最後看到<strong> 2004/01 ~ 2017/01 第一期至今特別獎號的出現次數</strong>：<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;機率漸趨於平均。<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;由以上3個分析結果可知，機率分布漸趨於<strong>Uniform分布</strong>。<br />
+                                <img src="http://i.imgur.com/yBEy5Wq.jpg" height="400" style="padding-top:20px;" /> <br />
+
+                            </p>
+                            <h3 style="font-size:20px; padding-top:40px;">例子驗證：與某獎號同時出現之獎號</h3>
+                            <p style="padding-top:20px; padding-left:20px">
+                                1. 我們先看到<strong> 2016/01 ~ 2017/01 近一年內與1號一起出現的其他獎號出現次數</strong>：<br />
+                                &nbsp;&nbsp;&nbsp;出現了多個高峰，機率分布不平均。<br />
+                                &nbsp;&nbsp;&nbsp;難道當1號出現時，這些高峰值得獎號出現機率也會較高嗎？<br />
+                                <img src="http://i.imgur.com/Vaqk6pz.jpg" height="400" style="padding-top:20px;" /> <br />
+                                2. 看到<strong> 2012/01 ~ 2017/01 近五年內與1號一起出現的其他獎號出現次數</strong>：<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;某些高峰消失，並出現新的高峰。<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;發現整體標準差變小。<br />
+                                <img src="http://i.imgur.com/UcwdwkJ.jpg" height="400" style="padding-top:20px;" /> <br />
+                                3. 最後看到<strong> 2004/01 ~ 2017/01 第一期至今與1號一起出現的其他獎號出現次數</strong>：<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;高峰值有變化，標準差更小，機率漸趨於平均。<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;由以上3個分析結果可知，我們<strong>難以找到號碼間的關聯性，可以說每次開獎都是獨立的</strong>。<br />
+                                <img src="http://i.imgur.com/RilY95i.jpg" height="400" style="padding-top:20px;" /> <br />
+
+                            </p>
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <div class="title">
+                    <h2>結論</h2>
+                    <div style="padding-left:40px; padding-bottom:20px">
+                        <p style="padding-top:20px; padding-left:20px">
+                            由於資料樣本數沒有超過可能出現的狀況數，分析結果可能不太準確。
+                            但透過以上例子，我們可以認為樂透獎號的出現機率是<strong> 接近相同 </strong>的，且獎號與獎號之間並<strong> 沒有明顯的關聯性 </strong>。<br />
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="copyright" class="container">
+        <p>&copy; 蘇俐文、黃嫈家. All rights reserved. | Photos by <a href="https://www.flickr.com/photos/streetfly_jz/6835998578/">Jzee</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
+    </div>
+</body>
+</html>
