@@ -12,9 +12,6 @@ class Ending extends Phaser.Scene {
     }
 
     create() {
-
-        console.log(this.sys.game.device.input.touch);
-
         // background
         this.background = this.add.image(0,0,"background");
         this.background.setOrigin(0,0);
@@ -31,43 +28,11 @@ class Ending extends Phaser.Scene {
         this.add.image(470, 1005, "burger_drink");
         this.add.image(420, 1005, "burger_drink");
 
-        this.rightBtn = this.add.image(540, 1210, "right");
-        this.leftBtn = this.add.image(180, 1210, "right");
-        this.leftBtn.flipX = true;
-
-        this.leftPressing = false;
-        this.rightPressing = false;
-
-        this.rightBtn.setInteractive();
-        this.leftBtn.setInteractive();
-        this.leftBtn.on('pointerdown', () => {
-            this.leftPressing = true;
-        });
-        this.leftBtn.on('pointerout', () => {
-            this.leftPressing = false;
-        });
-        this.rightBtn.on('pointerdown', () => {
-            this.rightPressing = true;
-        });
-        this.rightBtn.on('pointerout', () => {
-            this.rightPressing = false;
-        });
-
-        this.porinterStatusLabel = this.add.text(config.width/2, config.height/2-100, '', {
-            fontFamily: 'Flatwheat',
-            fontSize: 30,
-            align: 'center',
-            color: '#000000'
-        }).setOrigin(0.5,0.5);
-        
-
         // hina neko
         this.player = this.add.sprite(config.width/2 + 250, config.height-370, "celebrate_neko");
         this.player.play("celebrate_anim");
         this.player.setScale(1);
         
-        // Input
-        this.cursorKeys = this.input.keyboard.createCursorKeys();
         
         // back button
         this.backBtn = this.add.sprite(config.width/2, config.height/2+138, "button").setOrigin(0.5, 0.5);
@@ -169,9 +134,5 @@ class Ending extends Phaser.Scene {
             boundsAlignH: "center", 
             boundsAlignV: "middle"
         }).setOrigin(0.5, 0.5);
-    }
-
-    update() {
-        this.porinterStatusLabel.text = "touch: " + this.sys.game.device.input.touch + ", right: " + this.rightPressing + ", left: " + this.leftPressing;
     }
 }

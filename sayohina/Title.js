@@ -15,9 +15,6 @@ class Title extends Phaser.Scene {
         this.player.play("neko_anim");
         this.player.setScale(img_config.neko_scale);
         
-        // Input
-        this.cursorKeys = this.input.keyboard.createCursorKeys();
-        
         // Start button
         this.startBtn = this.add.sprite(config.width/2, config.height/2-130, "button").setOrigin(0.5, 0.5);
         this.startBtn.setInteractive();

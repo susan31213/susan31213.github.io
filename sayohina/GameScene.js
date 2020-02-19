@@ -10,12 +10,19 @@ class GameScene extends Phaser.Scene {
         this.background = this.add.image(0,0,"background");
         this.background.setOrigin(0,0);
 
+        // if touch device, add virtual button, otherwise, add keyboard cursor keys
+        if(this.sys.game.device.input.touch) {
+            this.touch_device_button();
+        }
+        else {
+            this.cursorKeys = this.input.keyboard.createCursorKeys();
+        }
+
         // hina neko
         this.player = this.physics.add.sprite(config.width/2, config.height-335, "neko");
         this.player.body.setSize(95,180, true);
         this.player.play("neko_anim");
         this.player.setScale(img_config.neko_scale);
-        this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.player.setCollideWorldBounds(true);
         this.playerSpeed = gameSetting.playerInitSpeed;
         
@@ -93,10 +100,39 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    touch_device_button() {
+        this.rightBtn = this.add.image(540, 1210, "right");
+        this.leftBtn = this.add.image(180, 1210, "right");
+        this.leftBtn.flipX = true;
+
+        this.leftPressing = false;
+        this.rightPressing = false;
+
+        this.rightBtn.setInteractive();
+        this.leftBtn.setInteractive();
+        this.leftBtn.on('pointerdown', () => {
+            this.leftPressing = true;
+        });
+        this.leftBtn.on('pointerout', () => {
+            this.leftPressing = false;
+        });
+        this.rightBtn.on('pointerdown', () => {
+            this.rightPressing = true;
+        });
+        this.rightBtn.on('pointerout', () => {
+            this.rightPressing = false;
+        });
+
+        if(config.physics.arcade.debug)
+            this.porinterStatusLabel = this.add.text(config.width/2, config.height/2-100, '', {
+                fontFamily: 'Flatwheat',
+                fontSize: 30,
+                align: 'center',
+                color: '#000000'
+            }).setOrigin(0.5,0.5);
+    }
+
     movePlayerManager() {
-
-        console.log(this.player.anims.currentAnim.key);
-
         if(this.player.alpha < 1) {
             this.player.setVelocity(0);
             if (this.player.anims.isPlaying) {
@@ -104,25 +140,49 @@ class GameScene extends Phaser.Scene {
             }
             return;
         }
+        
+        if(!this.sys.game.device.input.touch) {     // keyboard
+            if(this.cursorKeys.left.isDown) {
+                this.player.flipX = false;
+                if (!this.player.anims.isPlaying) {
+                    this.player.anims.play(this.player.anims.currentAnim.key);
+                }
+                this.player.setVelocityX(-this.playerSpeed);
+            }
+            else if (this.cursorKeys.right.isDown) {
+                this.player.flipX = true;
+                if (!this.player.anims.isPlaying){
+                    this.player.anims.play(this.player.anims.currentAnim.key);
+                }
+                this.player.setVelocityX(this.playerSpeed);
+            }
+            else {
+                this.player.setVelocity(0);
+                this.player.anims.stop(this.player.anims.currentAnim.key);
+            }
+        }
+        else {                                      // touch screen
+            if(this.leftPressing) {
+                this.player.flipX = false;
+                if (!this.player.anims.isPlaying) {
+                    this.player.anims.play(this.player.anims.currentAnim.key);
+                }
+                this.player.setVelocityX(-this.playerSpeed);
+            }
+            else if (this.rightPressing) {
+                this.player.flipX = true;
+                if (!this.player.anims.isPlaying){
+                    this.player.anims.play(this.player.anims.currentAnim.key);
+                }
+                this.player.setVelocityX(this.playerSpeed);
+            }
+            else {
+                this.player.setVelocity(0);
+                this.player.anims.stop(this.player.anims.currentAnim.key);
+            }
+        }
 
-        if(this.cursorKeys.left.isDown) {
-            this.player.flipX = false;
-            if (!this.player.anims.isPlaying) {
-                this.player.anims.play(this.player.anims.currentAnim.key);
-            }
-            this.player.setVelocityX(-this.playerSpeed);
-        }
-        else if (this.cursorKeys.right.isDown) {
-            this.player.flipX = true;
-            if (!this.player.anims.isPlaying){
-                this.player.anims.play(this.player.anims.currentAnim.key);
-            }
-            this.player.setVelocityX(this.playerSpeed);
-        }
-        else {
-            this.player.setVelocity(0);
-            this.player.anims.stop(this.player.anims.currentAnim.key);
-        }
+        
     }
 
     resetPlayer() {
