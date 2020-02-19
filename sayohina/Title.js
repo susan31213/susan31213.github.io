@@ -34,6 +34,8 @@ class Title extends Phaser.Scene {
         });
         this.startBtn.on('pointerup', () => {
             this.scene.start("playGame");
+            if(this.sys.game.device.input.touch)
+                window['game']['canvas'][game.device.fullscreen.request]();
         });
 
         // How to play button
