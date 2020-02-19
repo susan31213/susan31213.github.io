@@ -13,6 +13,8 @@ class Ending extends Phaser.Scene {
 
     create() {
 
+        console.log(this.sys.game.device.input.touch);
+
         // background
         this.background = this.add.image(0,0,"background");
         this.background.setOrigin(0,0);
@@ -51,7 +53,7 @@ class Ending extends Phaser.Scene {
             this.rightPressing = false;
         });
 
-        this.porinterStatusLabel = this.add.text(config.width/2, config.height/2, '', {
+        this.porinterStatusLabel = this.add.text(config.width/2, config.height/2-100, '', {
             fontFamily: 'Flatwheat',
             fontSize: 30,
             align: 'center',
@@ -170,6 +172,6 @@ class Ending extends Phaser.Scene {
     }
 
     update() {
-        this.porinterStatusLabel.text = "right: " + this.rightPressing + ", left: " + this.leftPressing;
+        this.porinterStatusLabel.text = "touch: " + this.sys.game.device.input.touch + ", right: " + this.rightPressing + ", left: " + this.leftPressing;
     }
 }
