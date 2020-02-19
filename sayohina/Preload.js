@@ -48,7 +48,7 @@ class Preload extends Phaser.Scene {
 
     create() {
         this.add.text(20,20,"Loading game...");
-        this.scene.start("ending");
+        this.scene.start("title");
 
         // hina neko animation
 
