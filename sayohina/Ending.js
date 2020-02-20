@@ -31,8 +31,11 @@ class Ending extends Phaser.Scene {
         // hina neko
         this.player = this.add.sprite(config.width/2 + 250, config.height-370, "celebrate_neko");
         this.player.play("celebrate_anim");
-        this.player.setScale(1);
-        
+        // hina neko
+        this.player2 = this.add.sprite(config.width/2 - 240, config.height-370, "celebrate_neko");
+        this.player2.play("celebrate_anim");
+        this.player2.flipX = true;
+
         
         // back button
         this.backBtn = this.add.sprite(config.width/2, config.height/2+138, "button").setOrigin(0.5, 0.5);
@@ -91,7 +94,7 @@ class Ending extends Phaser.Scene {
             this.fbBtn.setScale(1.0);
         });
         this.fbBtn.on('pointerup', () => {
-            window.open("https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.google.com%2F&quote=I%20got%20"+this.score+"%20points%20in%20Hina%20Neko's%20Adventure!", "_blank", "toolbar=0,status=0")
+            window.open("https://www.facebook.com/sharer/sharer.php?u=http://susan31213.github.io/sayohina&quote=I%20got%20"+this.score+"%20points%20in%20Hina%20Neko's%20Adventure! #氷川紗夜日菜生誕祭2020", "_blank", "toolbar=0,status=0");
         });
         this.twitterBtn = this.add.image(config.width/2 - 50, 650, "twitter");
         this.twitterBtn.setInteractive();
@@ -102,7 +105,7 @@ class Ending extends Phaser.Scene {
             this.twitterBtn.setScale(1.0);
         });
         this.twitterBtn.on('pointerup', () => {
-            window.open("https://twitter.com/intent/tweet?text=I%20got%20"+this.score+"%20points%20in%20Hina%20Neko's%20Adventure!%20https%3A%2F%2Fwww.google.com%2F", "_blank", "toolbar=0,status=0")
+            window.open("https://twitter.com/intent/tweet?text=I%20got%20"+this.score+"%20points%20in%20Hina%20Neko's%20Adventure!"+encodeURIComponent('\nhttp://susan31213.github.io/sayohina\n#氷川紗夜日菜生誕祭2020'), "_blank", "toolbar=0,status=0");
         });
         this.plurkBtn = this.add.image(config.width/2 + 50, 650, "plurk");
         this.plurkBtn.setInteractive();
@@ -113,7 +116,7 @@ class Ending extends Phaser.Scene {
             this.plurkBtn.setScale(1.0);
         });
         this.plurkBtn.on('pointerup', () => {
-            window.open('http://www.plurk.com/?qualifier=shares&status='.concat(encodeURIComponent('http://www.google.com')).concat(encodeURIComponent("\nI got "+this.score+" points in Hina neko's Adventure!")))
+            window.open('http://www.plurk.com/m?qualifier=shares&content='.concat(encodeURIComponent('https://i.imgur.com/XY4Y38F.png\nhttp://susan31213.github.io/sayohina')).concat(encodeURIComponent("\nI got "+this.score+" points in Hina neko's Adventure!\n#氷川紗夜日菜生誕祭2020")));
         });
         this.weiboBtn = this.add.image(config.width/2 + 150, 650, "weibo");
         this.weiboBtn.setInteractive();
@@ -124,7 +127,8 @@ class Ending extends Phaser.Scene {
             this.weiboBtn.setScale(1.0);
         });
         this.weiboBtn.on('pointerup', () => {
-            window.open("http://service.weibo.com/share/share.php?url=http://www.google.com&appkey=&title=I got "+this.score+" points in Hina neko\'s Adventure!&pic=&ralateUid=&")
+            var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://service.weibo.com/share/share.php?url='+'https://susan31213.github.io/sayohina'+'&title=I got '+this.score+' points in Hina neko\'s Adventure! '.concat(encodeURIComponent('#氷川紗夜日菜生誕祭2020')),x=function(){if(!window.open(r,'weibo','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()};
+            //window.open("http://service.weibo.com/share/share.php?url=http://www.google.com&appkey=&title=I got "+this.score+" points in Hina neko\'s Adventure!&pic=&ralateUid=&");
         });
         this.shareLabel = this.add.text(config.width/2, 580, 'share your score!', {
             fontFamily: 'Flatwheat',

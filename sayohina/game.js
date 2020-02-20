@@ -26,5 +26,6 @@ var config = {
         }
     }
 }
-
+    
+var isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 var game = new Phaser.Game(config);
